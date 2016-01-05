@@ -26,6 +26,8 @@ public class Dados {
 		possiveis = c1.letra + c2.letra + c3.letra + c4.letra + 
 				c5.letra + c6.letra + c7.letra + c8.letra;
 		
+		// c1 c2 c3 c4 c5 c6 c7 c8
+		// B  N  S  T  F  M  A  U
 		quantidade = possiveis.length();
 		
 		// distancia entre c1 c2 ... c8

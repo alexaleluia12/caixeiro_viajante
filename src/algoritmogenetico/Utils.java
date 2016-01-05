@@ -5,8 +5,7 @@ import java.util.Random;
 public class Utils {
 	
 	public static Integer rand0100(){
-		Random r = new Random();
-		return r.nextInt(101);
+		return rand(101);
 //		return (int) (Math.random()*100);
 	}
 	
