@@ -1,25 +1,6 @@
 package algoritmogenetico;
 
 
-/*
-Implemente o algoritmo genetico classico
-
-- geracao randomica
-- individuos valores (numeros inteiros)
-*- selecao torneio
-	- selecao:
-		* escolha dos valores que mais se aproxima da solucao otima do problema
-		* escolha rondamica com favorecimento do melhor individo com base na funcao objetivo
-*- cruzamento single point
-	- cruzamento/crossover/combinacao
-		* usa parte dos genes dos pais para cria o individuo filho
-		
-*- mutacao por deformacao 10 % do intervalo
-	muda o gene aleatoriamente
-	pg 38
-
- */
-
 public class AG {
 	public Individuo[] populacao;
 	Dados dados;
@@ -41,24 +22,7 @@ public class AG {
 		// nao repete letra
 		// e tem o menor percurso
 		
-		Double menor = 0.0, aux;
-		int local_menor = -1, i, len = lst.length;
-		Individuo tmp;
-		
-		for(i=0; i<len; i++){
-			tmp = lst[i];
-			if(tmp == null)continue;
-			if(!tmp.repete()){// caso nao repita
-				aux = tmp.get_distancia_percurso(dados);
-				if(local_menor == -1 || aux <  menor){
-					local_menor = i;
-					menor = aux;
-				}
-			}
-		}
-		assert local_menor != -1;
-		
-		return lst[local_menor];
+		return lst[get_indice_mais_apto(lst)];
 		
 	}
 	

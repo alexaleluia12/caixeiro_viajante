@@ -62,6 +62,18 @@ public class Utils {
 		return aux;
 	}
 	
+	public static <T> boolean  contain(T lst[], T st){
+		int i, max = lst.length;
+		T aux;
+		for(i=0; i<max; i++){
+			aux = lst[i];
+			if(aux != null && aux.equals(st)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// considera que os elementos de lst sao string em binario
 	public static int[] lst_str_to_int(String lst[]){
 		int max = lst.length;

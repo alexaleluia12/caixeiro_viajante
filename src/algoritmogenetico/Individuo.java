@@ -20,8 +20,13 @@ public class Individuo {
 		int i, max = len;
 		
 		int max_randomico = dados.quantidade;
+		String tmp;
 		for(i=0; i<max; i++){
-			genes[i] = Utils.at(dados.possiveis, Utils.rand(max_randomico));
+			tmp = Utils.at(dados.possiveis, Utils.rand(max_randomico));
+			while(Utils.contain(genes, tmp)){
+				tmp = Utils.at(dados.possiveis, Utils.rand(max_randomico));
+			}
+			genes[i] = tmp;
 		}
 	}
 	
@@ -43,7 +48,6 @@ public class Individuo {
 			chave_nome = genes[i] + genes[i+1];
 			count += dados.get_distancia(chave_nome);
 		}
-		
 		return count;
 	}
 	
@@ -81,19 +85,74 @@ public class Individuo {
 		String lst[] = new String[a.len_genes];
 		int i, max = lst.length;
 		int rand_point = Utils.rand(len_genes);
+		// U,B,A,T,N,F,M,S - pai 
+		// M,A,S,F,B,U,N,T - mae
 		
-		// de 0 ate rand_point (a), de rand_point ate max b
+		// filho
+		// X,X,|X,X,|X,X,|X,X
+		//  p    m     p   m
 		
-		// a Individuo
-		for(i=0; i<rand_point; i++){
-			lst[i] = a.genes[i];
+		// dois de cima do pai
+		// anda dois, dois de baixo da mae se ja tiver pega do pai
+		int cout_pais = 2;
+		String tmp;
+		int j;
+		for(i=0; i<max; i+=2){
+			if(cout_pais%2 == 0){// pai
+				tmp = a.genes[i];
+				j = i;
+				while(Utils.contain(lst, tmp)){// pega o da mae
+					tmp = b.genes[j];
+					if(j+1 < max){
+						j++;
+					} else {
+						j = 0;
+					}
+					
+				}
+
+				lst[i] = tmp;
+				tmp = a.genes[i+1];
+				j = i+1;
+				while(Utils.contain(lst, tmp)){
+					tmp = b.genes[j];
+					if(j+1 < max){
+						j++;
+					} else {
+						j = 0;
+					}
+					
+				}
+				lst[i+1] = tmp;
+				
+			} else {// mae
+				tmp = b.genes[i];
+				j = i;
+				while(Utils.contain(lst, tmp)){// pega o da mae
+					tmp = a.genes[j];
+					if(j+1 < max){
+						j++;
+					} else {
+						j = 0;
+					}
+				}
+				lst[i] = tmp;
+				
+				tmp = b.genes[i+1];
+				j = i + 1;
+				while(Utils.contain(lst, tmp)){
+					tmp = a.genes[j];
+					if(j+1 < max){
+						j++;
+					} else {
+						j = 0;
+					}
+				}
+				lst[i+1] = tmp;
+			}
+			cout_pais++;
+			
 		}
-		
-		// b Individuo
-		for(; i<max; i++){
-			lst[i] = b.genes[i];
-		}
-		
 		return lst;
 	}
 	
