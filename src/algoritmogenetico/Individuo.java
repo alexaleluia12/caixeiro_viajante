@@ -80,7 +80,7 @@ public class Individuo {
 	}
 	
 	// retorna os genes do filho (faz o cruzamento entre os pais)
-	// cruzamento sigle point
+	// cruzamento mascara
 	private String[] crossover(Individuo a, Individuo b){
 		String lst[] = new String[a.len_genes];
 		int i, max = lst.length;
@@ -128,7 +128,7 @@ public class Individuo {
 			} else {// mae
 				tmp = b.genes[i];
 				j = i;
-				while(Utils.contain(lst, tmp)){// pega o da mae
+				while(Utils.contain(lst, tmp)){// pega o da pai
 					tmp = a.genes[j];
 					if(j+1 < max){
 						j++;
